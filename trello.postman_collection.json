@@ -1,0 +1,2323 @@
+{
+	"info": {
+		"_postman_id": "d262ed72-bd0d-49fb-972c-4c12e3947f63",
+		"name": "trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "无权访问，请登录",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/test/auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"test",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "695ba6a3-7475-4746-aa78-f123c410a6f9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9d70c4c-95ef-4c37-b904-6efb4595c2d8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "用户注册",
+					"item": [
+						{
+							"name": "用户名只能在1~50个字符之间",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a85a7e74-244d-4625-86f9-b58ccc5d7ff3",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "密码不能为空",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f7718ac4-5953-49b0-8fca-15b99b95826b",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"aplay\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "两次密码输入不一致",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8c959786-5a2a-4d09-acd2-f1690fa2e93c",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"aplay\",\n\t\"password\": \"123\",\n\t\"rePassword\": \"456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户注册成功",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "344dcc41-ab92-4693-9a45-9df954fdc8d6",
+										"exec": [
+											"pm.test(\"status 201\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"juff\",\n\t\"password\": \"123\",\n\t\"rePassword\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "用户登录",
+					"item": [
+						{
+							"name": "用户名只能在1~50个字符之间",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d6442f19-c4ef-473c-9960-3adc8fdb2d11",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\",\n\t\"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "密码不能为空",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b0973a71-e1e3-46b5-b327-90aa75796272",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"juff\",\n\t\"password\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用户登录成功",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5a66ca2b-d50e-4a48-bdea-f1a83e1fea17",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"juff\",\n\t\"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "登录失败，用户名不存在",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ae5be5da-eb6b-4c3b-9b4c-8a136e8c1e47",
+										"exec": [
+											"pm.test(\"status 404\", () => {\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"sivan\",\n\t\"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "登陆失败，密码错误",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "52d63f80-765d-483f-b7e3-1d3c574e6926",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"juff\",\n\t\"password\": \"000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "创建新面板",
+					"item": [
+						{
+							"name": "面板名称不能为空",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dbf3a34c-8abf-476a-8c94-b4159999ebcd",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/board",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "面板名称不能大于255个字符",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "27137a3a-147e-4543-9456-280ee7902e03",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/board",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "创建新面板",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e30307de-0c34-41a0-865a-44b289543dd5",
+										"exec": [
+											"pm.test(\"status 201\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"newboard-3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/board",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取当前登录用户的所有面板",
+					"item": [
+						{
+							"name": "获取当前登录用户的所有面板",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9fc84d6a-0259-49db-923d-97741584dd98",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/board",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取当前登录用户指定的一个面板的详情",
+					"item": [
+						{
+							"name": "获取当前登录用户指定的一个面板的详情",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8fa1c32e-0be1-425c-a719-f8b8e3d2af09",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/board/11",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "更新指定的面板",
+					"item": [
+						{
+							"name": "更新指定的面板",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6e868619-75e4-48a6-983c-48329d86d464",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"new-board-1-被我修改了\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/board/11",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "删除指定的面板",
+					"item": [
+						{
+							"name": "删除指定的面板",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5a0dbaaf-a5b4-4081-bed1-8a680729d265",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/board/13",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"board",
+										"13"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "BoardList",
+			"item": [
+				{
+					"name": "创建列表",
+					"item": [
+						{
+							"name": "创建列表",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "80ec577e-dae0-4db5-95dd-59c3d5dfc8a2",
+										"exec": [
+											"pm.test(\"status 201\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": \"1\",\n\t\"name\": \"新建列表-2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "面板id不能为空且必须为数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e2eee52f-b94a-4d5f-9115-266461a8398e",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": 1,\n\t\"name\": \"新建列表-2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取当前用户指定面板下的所有列表集合",
+					"item": [
+						{
+							"name": "面板不能为空且必须是数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6e42ceb9-6652-44c2-a8a3-e38641c6149f",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取所有面板",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1c45ba5f-5584-4cda-a339-31b37a2666b5",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/list?boardId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list"
+									],
+									"query": [
+										{
+											"key": "boardId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取指定列表详情",
+					"item": [
+						{
+							"name": "获取指定列表详情",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d42c50a7-5296-4e24-a29d-9d8b291eb4d6",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/list/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "更新列表",
+					"item": [
+						{
+							"name": "面板id不能为空且必须为数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "196e0994-f469-408f-b5a8-19d616cf84fa",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": \"\",\n\t\"name\": \"这是我新修改的面板列表\",\n\t\"order\": 65525\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "列表名称不能为空",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7159243f-a84c-4c4b-9f08-f724869080b0",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": 1,\n\t\"name\": \"\",\n\t\"order\": 65525\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "order值必须是个数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cfdf616b-bf3f-4437-a91d-735ab6a49525",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": 1,\n\t\"name\": \"这是新修改的列表\",\n\t\"order\": \"65525\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "更新列表",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "45817ed9-595f-4332-a4ef-fa1b7864842b",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardId\": 1,\n\t\"name\": \"这是新更新的列表\",\n\t\"order\": 65525\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/list/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "删除列表",
+					"item": [
+						{
+							"name": "删除列表",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f7a90d6c-5411-4a7f-9bb8-79805ce567b2",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/list/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"list",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "BoardListCard",
+			"item": [
+				{
+					"name": "创建卡片",
+					"item": [
+						{
+							"name": "创建卡片",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "83cfb8da-73e9-4a81-a1c5-32784f3e8738",
+										"exec": [
+											"pm.test(\"status 201\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 2,\n\t\"name\": \"board-list-card-content-21\",\n\t\"description\": \"我是详情信息\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boardListId不能为空且必须是大于1的数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1662b773-3aeb-42ad-a26b-6e732260820d",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": \"\",\n\t\"name\": \"hello\",\n\t\"description\": \"简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "卡片名称不能为空",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c63c7889-706e-44bb-9029-9d22292901c7",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"\",\n\t\"description\": \"简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "卡片描述不能大于2000个字符",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "78dfe973-e956-4729-9382-de0772e8c06f",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"hello\",\n\t\"description\": \"12333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取卡片列表",
+					"item": [
+						{
+							"name": "获取卡片列表",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "63412321-7b42-4d39-aaa9-35b498c9596d",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card?boardListId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									],
+									"query": [
+										{
+											"key": "boardListId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boardListId不能为空且必须是数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "964c579f-b3ca-4e5a-9b7a-8250c85debc8",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取一个卡片信息",
+					"item": [
+						{
+							"name": "获取一个卡片信息",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0cba7358-e483-467b-9ec4-bd7d12a50496",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "更新一个卡片信息",
+					"item": [
+						{
+							"name": "更新一个卡片信息",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1d6c230-5253-40d1-9713-ccec81ec5f08",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"这是修改的卡片\",\n\t\"order\": 65535,\n\t\"description\": \"这是修改的卡片的简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "boardListId不能为空且必须是大于1的数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0867a22a-58b3-469e-83ad-46a38a209acd",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": \"\",\n\t\"name\": \"这是修改的卡片\",\n\t\"order\": 65535,\n\t\"description\": \"这是修改的卡片的简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "卡片名称不能大于255个字符",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "654788b0-c1bc-4846-b5f3-067d0ecf9b04",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\",\n\t\"order\": 65535,\n\t\"description\": \"这是修改的卡片的简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "卡片描述不能大于2000个字符",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1a918d7f-3dc9-4122-b4b4-6a87a76730db",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\",\n\t\"order\": 65535,\n\t\"description\": \"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "order必须为数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "63e42411-180d-4edf-9304-60c933b45252",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListId\": 1,\n\t\"name\": \"这是修改的卡片\",\n\t\"order\": \"65535\",\n\t\"description\": \"这是修改的卡片的简述\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "删除一个卡片信息",
+					"item": [
+						{
+							"name": "删除一个卡片信息",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d0844979-b3cb-4cf7-aa81-f208fed81981",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "附件上传",
+					"item": [
+						{
+							"name": "附件上传",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e39ffd70-a76b-473a-a49d-2b9ee9d91a9d",
+										"exec": [
+											"pm.test(\"status 201\", () => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "boardListCardId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "attachment",
+											"type": "file",
+											"src": "/C:/Users/FatCeng/Desktop/logo.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/card/attachment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"attachment"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "删除附件",
+					"item": [
+						{
+							"name": "删除附件",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "df0663dd-18ac-4e76-8a2a-57d7fa61e58e",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card/attachment/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"attachment",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "设置封面",
+					"item": [
+						{
+							"name": "设置封面",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fe14da66-c31b-4d64-a985-b5e59e353ac0",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card/attachment/cover/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"attachment",
+										"cover",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "取消封面",
+					"item": [
+						{
+							"name": "取消封面",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "57040352-ed0c-49af-af40-5f8f240ae080",
+										"exec": [
+											"pm.test(\"status 204\", () => {\r",
+											"    pm.response.to.have.status(204)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/card/attachment/cover/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"card",
+										"attachment",
+										"cover",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "添加评论",
+					"item": [
+						{
+							"name": "boardListCardId必须为数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "79b6c21a-6615-4430-8c14-8bd3dc534987",
+										"exec": [
+											"ppm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListCardId\": \"1\",\n\t\"content\": \"添加评论\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "评论内容不能大于2000个字符",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2e691804-96fd-4781-ae57-e9d57ff7cd57",
+										"exec": [
+											"ppm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListCardId\": 1,\n\t\"content\": \"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "添加评论",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ebfc9a26-92d1-40da-81e1-a3f7d67812df",
+										"exec": [
+											"pm.test('status 201',() => {\r",
+											"    pm.response.to.have.status(201)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"boardListCardId\": 1,\n\t\"content\": \"新增评论内容\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "获取评论",
+					"item": [
+						{
+							"name": "boardListCardId必须为数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "402f5661-3832-4980-9d27-1f3d771c3482",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "分页必须是数字",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "890063ce-f719-4bf7-b3de-2069f52b1c1d",
+										"exec": [
+											"pm.test(\"status 422\", () => {\r",
+											"    pm.response.to.have.status(422)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment?boardListCardId=1&page=f",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									],
+									"query": [
+										{
+											"key": "boardListCardId",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "获取评论",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d38316e1-c4f2-476b-9c98-01b211d20322",
+										"exec": [
+											"pm.test(\"status 200\", () => {\r",
+											"    pm.response.to.have.status(200)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/comment?boardListCardId=1&page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"comment"
+									],
+									"query": [
+										{
+											"key": "boardListCardId",
+											"value": "1"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ccd1fa05-a002-43e0-b1ce-352cf2ae6e4d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "31ad2b92-da29-4028-968d-1b3007fe04ad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "09890cae-0192-42e9-9b78-3468a0a3839e",
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"id": "bbe257e1-6877-4556-af84-a04f9bcd2c69",
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZhdCIsImlhdCI6MTU4OTc3MjM1OX0.NuthqJXe8h8GiWxhYZqXiAeFv6MAY-yJpq3epbkjCuo",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
